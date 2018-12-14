@@ -62,8 +62,8 @@ class Board {
 
         const playDidWin = (position) => {
             const allThreeMatch = (i) => (this.plays[wins[i][0]] === this.turn
-            && this.plays[wins[i][1]] === this.turn
-            && this.plays[wins[i][2]] === this.turn)
+                && this.plays[wins[i][1]] === this.turn
+                && this.plays[wins[i][2]] === this.turn)
 
             position = parseInt(position);
             for(let i = 0; i < wins.length; i++) {
