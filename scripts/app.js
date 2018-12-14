@@ -11,9 +11,13 @@ class Board {
         this.plays = new Array(9);
         this.playerScores = [0, 0];
         this.plays.fill(null);
+        this.active = true;
     }
 
     playTurn(event) {
+        if(!this.active) {
+            return;
+        }
         const square = event.target;
         const position = square.dataset.position;
         if(this.turn === 'X') {
@@ -57,14 +61,16 @@ class Board {
         ]
 
         const playDidWin = (position) => {
+            const allThreeMatch = (i) => (this.plays[wins[i][0]] === this.turn
+            && this.plays[wins[i][1]] === this.turn
+            && this.plays[wins[i][2]] === this.turn)
+
             position = parseInt(position);
             for(let i = 0; i < wins.length; i++) {
                 if(wins[i].includes(position)) {
-                    if(this.plays[wins[i][0]] === this.turn
-                        && this.plays[wins[i][1]] === this.turn
-                        && this.plays[wins[i][2]] === this.turn) {
-                            return true;
-                        }
+                    if(allThreeMatch(i)) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -74,18 +80,24 @@ class Board {
             this.declareWinner(this.turn, `${this.turn} won!`);
             return true;
         } else if(this.plays.filter(play => play !== null).length === 9) {
-            console.log('draw');
+            this.declareDraw('The game is a draw');
             return true;
         }
         return false;
     }
 
     declareWinner(turn, message) {
+        this.active = false;
         const [score1, score2] = document.querySelectorAll('#score1, #score2');
         const score = turn === 'X' ? score1 : score2;
         const player = turn === 'X' ? 0 : 1;
         this.playerScores[player] += 1;
         score.innerHTML = this.playerScores[player];
+        this.displayStatus(message);
+    }
+
+    declareDraw(message) {
+        this.active = false;
         this.displayStatus(message);
     }
 
