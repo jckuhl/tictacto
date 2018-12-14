@@ -1,0 +1,57 @@
+:root {
+    --bg-color: rgb(181, 209, 255);
+    --bg-selected: rebeccapurple;
+    --bg-player: rgb(222, 140, 255);
+    --bg-board-1: rgb(112, 185, 255);
+    --bg-board-2: rgb(71, 165, 255);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-color);
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.scoreboard {
+    display: flex;
+}
+
+.player {
+    padding: 0.5em;
+    margin: 1em;
+    font-size: 1.5em;
+    border: 3px solid black;
+    background-color: var(--bg-player);
+}
+
+.grid {
+    display: grid;
+    grid-template: repeat(3, 5em) / repeat(3, 5em);
+    background: var(--bg-board-1);
+}
+
+.square {
+    border: 2px solid black;
+    margin: -2px 0 0 -2px;
+}
+
+.square:nth-child(odd) {
+    background: var(--bg-board-2);
+}
+
+.selected {
+    background-color: var(--bg-selected);
+}
+
+.status {
+    display: none;
+}
