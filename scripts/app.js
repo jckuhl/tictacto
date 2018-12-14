@@ -12,6 +12,10 @@ class Board {
         this.playerScores = [0, 0];
         this.plays.fill(null);
         this.active = true;
+        this.playBtn = document.getElementById('play-again');
+        // this.playBtn.disabled = true;
+        this.playBtn.addEventListener('click', this.playAgain.bind(this));
+        this.status = document.querySelector('.status');
     }
 
     playTurn(event) {
@@ -37,11 +41,11 @@ class Board {
         const player1 = document.getElementById('player1');
         const player2 = document.getElementById('player2');
         if(letter === 'X') {
-            player1.classList.add('selected');
-            player2.classList.remove('selected');
+            player1.classList.add('selected1');
+            player2.classList.remove('selected2');
         } else {
-            player2.classList.add('selected');
-            player1.classList.remove('selected');
+            player2.classList.add('selected2');
+            player1.classList.remove('selected1');
         }
     }
 
@@ -102,9 +106,18 @@ class Board {
     }
 
     displayStatus(message) {
-        const status = document.querySelector('.status');
-        status.style.display = 'block';
-        status.innerHTML = message;
+        this.status.style.display = 'block';
+        this.status.firstElementChild.innerHTML = message;
+        this.playBtn.disabled = false;
+    }
+
+    playAgain() {
+        this.plays = new Array(9);
+        this.plays.fill(null);
+        this.squares.forEach(square => square.innerHTML = '');
+        this.active = true;
+        // this.playBtn.disabled = true;
+        // this.status.style.display = 'none';
     }
 }
 
