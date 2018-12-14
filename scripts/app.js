@@ -13,7 +13,7 @@ class Board {
         this.plays.fill(null);
         this.active = true;
         this.playBtn = document.getElementById('play-again');
-        // this.playBtn.disabled = true;
+        this.playBtn.disabled = true;
         this.playBtn.addEventListener('click', this.playAgain.bind(this));
         this.status = document.querySelector('.status');
     }
@@ -24,6 +24,9 @@ class Board {
         }
         const square = event.target;
         const position = square.dataset.position;
+        if(this.plays[position] !== null) {
+            return;
+        }
         if(this.turn === 'X') {
             square.innerHTML = 'X';
         } else {
@@ -38,8 +41,7 @@ class Board {
 
     setTurn(letter) {
         this.turn = letter;
-        const player1 = document.getElementById('player1');
-        const player2 = document.getElementById('player2');
+        const [player1, player2] = document.querySelectorAll('#player1, #player2');
         if(letter === 'X') {
             player1.classList.add('selected1');
             player2.classList.remove('selected2');
@@ -116,10 +118,11 @@ class Board {
         this.plays.fill(null);
         this.squares.forEach(square => square.innerHTML = '');
         this.active = true;
-        // this.playBtn.disabled = true;
-        // this.status.style.display = 'none';
+        this.playBtn.disabled = true;
+        this.status.style.display = 'none';
     }
 }
 
-//! remove
-window.board = new Board();
+(function() {
+    new Board();
+})();

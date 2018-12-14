@@ -85,6 +85,8 @@ body {
     margin: -2px 0 0 -2px;
     text-align: center;
     font-size: 2rem;
+    
+    /* center the text nodes with flex */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,6 +94,7 @@ body {
 
 .square:hover {
     border: 5px solid black;
+    cursor: pointer;
 }
 
 .square:nth-child(odd) {
@@ -99,7 +102,7 @@ body {
 }
 
 .status {
-    display: block;
+    display: none;
     background: var(--bg-status);
     padding: 1rem;
     border: 2px solid black;
@@ -118,11 +121,12 @@ body {
 }
 
 .status button:active {
-    transform: translateY(10px) !important;
+    transform: translateY(5px) !important;
     transition: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .status button:hover {
     transform: scale(1.02);
     transition: 0.15s;
+    cursor: pointer;
 }
