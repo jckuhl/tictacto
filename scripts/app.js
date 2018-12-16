@@ -1,7 +1,5 @@
 class Board {
     constructor() {
-        this.board = document.querySelector('.grid');
-        this.scoreboard = document.querySelector('.scoreboard');
         this.turn = 'X';
         this.squares = document.querySelectorAll('.square');
         this.squares.forEach((square, index) => {
@@ -27,11 +25,7 @@ class Board {
         if(this.plays[position] !== null) {
             return;
         }
-        if(this.turn === 'X') {
-            square.innerHTML = 'X';
-        } else {
-            square.innerHTML = 'O';
-        }
+        square.innerHTML = this.turn === 'X' ? 'X' : 'O';
         this.plays[position] = square.innerHTML;
         const gameOver = this.checkWin(position);
         if(!gameOver) {
@@ -120,6 +114,7 @@ class Board {
         this.active = true;
         this.playBtn.disabled = true;
         this.status.style.display = 'none';
+        this.setTurn('X');  // X always goes first
     }
 }
 
